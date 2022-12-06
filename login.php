@@ -14,16 +14,14 @@ $result = $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
     if (password_verify($password, $row["password_hash"])) {
-        $payload = [
-            $data => [
-                "user_id" => $row["user_id"],
-                "email" => $email,
-            ]
-        ];
+        $data = ["user_id" => $row["user_id"], "email" => $row["email"]];
+        $payload = [$data];
         $secret = "Firebase JWT secret";
-        $token = JWT::encode($payload, $secret, "H256");
+        $token = JWT::encode($payload, $secret, "HS256");
         echo json_encode(["success" => true, "email" => $email, "token" => $token]);
+    }
+    else {
+        echo json_encode(["success" => false, "message" => "Email or password is incorrect"]);
     }
 }
 
-echo json_encode(["success" => false, "message" => "Email or password is incorrect"]);
