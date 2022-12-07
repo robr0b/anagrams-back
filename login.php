@@ -1,12 +1,13 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-require_once "connection.php";
-require_once "generate-jwt-token.php";
+require_once "utils/connection.php";
+require_once "utils/jwt-token.php";
+
 $email = $_POST["email"] ?? "";
 $password = $_POST["password"] ?? "";
 
 $conn = getConnection();
-$stmt = $conn->prepare("select * from users where email=:email");
+$stmt = $conn->prepare("select user_id, email from users where email=:email");
 $stmt->bindValue(":email", $email);
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
