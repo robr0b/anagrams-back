@@ -20,7 +20,8 @@ else {
     $user_data = $data[0];
     if (password_verify($password, $data[0]["password_hash"])) {
         $response_data = ["user_id" => $user_data["user_id"], "email" => $user_data["email"]];
-        $payload = [$response_data];
+        $payload = ["exp" => time() + 1200,
+            "data" => $response_data];
         $secret = "Firebase JWT secret";
         $token = JWT::encode($payload, $secret, "HS256");
         echo json_encode(["success" => true, "email" => $email, "token" => $token]);
