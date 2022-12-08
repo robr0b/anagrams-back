@@ -1,10 +1,6 @@
 <?php
 require_once "vendor/autoload.php";
-if (file_exists(".env")) {
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
-}
-
+echo $_ENV["DB_SERVERNAME"];
 function getConnection() : PDO {
     $servername = $_ENV["DB_SERVERNAME"];
     $dbname = $_ENV["DB_NAME"];

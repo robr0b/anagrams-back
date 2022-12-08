@@ -5,9 +5,6 @@ require_once "connection.php";
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
 function generateJWTToken($user_data): string {
     $payload = ["exp" => time() + 1200,
         "data" => $user_data];
