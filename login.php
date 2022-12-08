@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-require_once "utils/connection.php";
-require_once "utils/jwt-token.php";
+require_once "connection.php";
+require_once "jwt-token.php";
 
 $email = $_POST["email"] ?? "";
 $password = $_POST["password"] ?? "";
