@@ -5,6 +5,14 @@ require_once "connection.php";
 require_once "jwt-token.php";
 require_once "vendor/autoload.php";
 
-var_dump($_ENV);
-var_dump(getenv());
+if (file_exists(".env")) {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+}
+try {
+    var_dump(getenv("JWT_SECRET"));
+}
+catch (Exception $exception) {
+    echo "error";
+}
 //var_dump(tokenIsValid($_POST["token"]));
