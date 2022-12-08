@@ -5,5 +5,6 @@ require_once "connection.php";
 require_once "jwt-token.php";
 require_once "vendor/autoload.php";
 
-
-var_dump(tokenIsValid($_POST["token"]));
+var_dump($_ENV);
+var_dump(getenv());
+//var_dump(tokenIsValid($_POST["token"]));
