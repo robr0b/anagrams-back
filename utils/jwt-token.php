@@ -5,19 +5,19 @@ require_once "connection.php";
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-const SECRET = "my-firebase-secret-5000";
-
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__."\..");
+$dotenv->load();
 
 function generateJWTToken($user_data): string {
     $payload = ["exp" => time() + 1200,
         "data" => $user_data];
 
-    return JWT::encode($payload, SECRET, "HS256");
+    return JWT::encode($payload, $_ENV["JWT_SECRET"], "HS256");
 }
 
 function tokenIsValid($token) : bool {
     try {
-        $decoded_token = JWT::decode($token, new Key(SECRET, "HS256"));
+        $decoded_token = JWT::decode($token, new Key($_ENV["JWT_SECRET"], "HS256"));
     } catch (Exception $e) {
         return false;
     }

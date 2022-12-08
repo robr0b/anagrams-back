@@ -7,7 +7,7 @@ $email = $_POST["email"] ?? "";
 $password = $_POST["password"] ?? "";
 
 $conn = getConnection();
-$stmt = $conn->prepare("select user_id, email from users where email=:email");
+$stmt = $conn->prepare("select * from users where email=:email");
 $stmt->bindValue(":email", $email);
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -1,10 +1,13 @@
 <?php
+require_once "vendor/autoload.php";
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__."\..");
+$dotenv->load();
 
 function getConnection() : PDO {
-    $servername = "eu-cdbr-west-03.cleardb.net";
-    $dbname = "heroku_109a4d54ce8ea34";
-    $username = "bede7a339b4aa5";
-    $password = "3b2a0345";
+    $servername = $_ENV["DB_SERVERNAME"];
+    $dbname = $_ENV["DB_NAME"];
+    $username = $_ENV["DB_USERNAME"];
+    $password = $_ENV["DB_PASSWORD"];
 
     $address = sprintf('mysql:host=%s;port=3306;dbname=%s',
         $servername, $dbname);
