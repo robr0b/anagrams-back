@@ -25,11 +25,11 @@ function getResponse($email, $password) {
     }
     if (!preg_match("@[A-Z]@", $password))  {
         $response["success"] = false;
-        $response["message"][] = "Password must contain an uppercase character";
+        $response["message"][] = "Password must contain an uppercase letter";
     }
     if (!preg_match("@[a-z]@", $password)) {
         $response["success"] = false;
-        $response["message"][] = "Password must contain a lowercase character";
+        $response["message"][] = "Password must contain a lowercase letter";
     }
 
     if (!preg_match("@[0-9]@", $password)) {

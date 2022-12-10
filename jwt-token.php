@@ -19,7 +19,19 @@ function generateJWTToken($user_data): string {
     return JWT::encode($payload, $_ENV["JWT_SECRET"], "HS256");
 }
 
-function tokenIsValid($token) : bool {
+
+/**
+ * Get the user data if their token is valid and user exists in database. Otherwise, return false
+ *
+ * @param string $email The email that the user has provided via their request
+ * @param string $token HThe token that the user has provided via their request
+ *
+ *
+ * @return array | false User data / bool(false) depending on the input
+ */
+function getUserDataFromEmailAndToken(string $email, string $token): array|bool
+{
+
     try {
         $decoded_token = JWT::decode($token, new Key($_ENV["JWT_SECRET"], "HS256"));
     } catch (Exception $e) {
@@ -37,6 +49,10 @@ function tokenIsValid($token) : bool {
     if (sizeof($result) !== 1) {
         return false;
     }
-    return $result[0]["user_id"] == $decoded_token->data->user_id &&
-            $result[0]["email"] == $decoded_token->data->email;
+    if ($decoded_token->data->user_id !== $result[0]["user_id"] ||
+        $decoded_token->data->email !== $result[0]["email"] ||
+        $decoded_token->data->email !== $email) {
+        return false;
+    }
+    return $result[0];
 }
