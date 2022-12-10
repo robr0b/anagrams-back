@@ -30,12 +30,13 @@ function findAnagrams(string $word, array $wordbase_words) : array {
 
         if (!array_key_exists($sorted_word_str, $wordbase_hashmap)) {
 
-            $wordbase_hashmap[$sorted_word_str] = [$word];
+            $wordbase_hashmap[$sorted_word_str] = [$wordbase_word];
         }
         else {
-            $wordbase_hashmap[$sorted_word_str][] = $word;
+            $wordbase_hashmap[$sorted_word_str][] = $wordbase_word;
         }
     }
+
 
     $sorted_user_word_array = mb_str_split($word);
     sort($sorted_user_word_array);
