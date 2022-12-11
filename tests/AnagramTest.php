@@ -26,10 +26,10 @@ class AnagramTest extends PHPUnit\Framework\TestCase {
     }
 
     public function testSingleMatch() {
-        $wordbase = ["aaa", "bbb", "ccc"];
-        $word = "aaa";
+        $wordbase = ["baa", "bbb", "ccc"];
+        $word = "aba";
         $anagrams = findAnagrams($word, $wordbase);
-        $this->assertContains("aaa", $anagrams);
+        $this->assertContains("baa", $anagrams);
     }
 
     public function testAllMatch() {
