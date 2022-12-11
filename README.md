@@ -5,7 +5,14 @@ To install the dependencies, run:
 
 composer install
 
-To run the app:
+To run the app, create a .env file with the following variables:
+DB_SERVERNAME
+DB_USERNAME
+DB_NAME
+DB_PASSWORD
+JWT_SECRET
+
+Then:
 
 php -S localhost:8000
 
