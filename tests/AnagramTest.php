@@ -36,7 +36,7 @@ class AnagramTest extends PHPUnit\Framework\TestCase {
         $wordbase = ["abc", "acb", "bac", "bca", "cab", "cba"];
         $word = "abc";
         $anagrams = findAnagrams($word, $wordbase);
-        $this->assertContains("abc", $anagrams);
+        $this->assertNotContains("abc", $anagrams);
         $this->assertContains("acb", $anagrams);
         $this->assertContains("bac", $anagrams);
         $this->assertContains("bac", $anagrams);

@@ -22,7 +22,7 @@ function findAnagrams(string $word, array $wordbase_words) : array {
     $wordbase_hashmap = [];
 
     foreach ($wordbase_words as $wordbase_word) {
-        if (mb_str_split(trim($wordbase_word)) === $word) {
+        if (trim($wordbase_word) === $word) {
             continue;
         }
 
