@@ -3,4 +3,3 @@
 .vscode
 .env
 .phpunit.result.cache
-phpunit.xml
