@@ -16,6 +16,6 @@ Then:
 
 php -S localhost:8000
 
-To run the tests for the anagram algorithm:
+To run the tests for the anagrams algorithm:
 
 ./vendor/bin/phpunit  
