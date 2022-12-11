@@ -49,7 +49,21 @@ function findAnagrams(string $word, array $wordbase_words) : array {
     return [];
 }
 
-function getResponse($word, $email, $token) {
+
+/**
+ * Get anagrams for a given word. Wordbase is taken from database. If user's token is valid, check if
+ * user has got a wordbase. If user has a wordbase, feed the word and the wordbase to the search algorithm.
+ * Return found anagrams. If the user does not have a wordbase, return JSON with success => false and a
+ * message asking to import a wordbase. If user's token is invalid, return JSON with success => false and
+ * a message notifying that user's token is invalid.
+ *
+ * @param string $word The word to find anagrams for
+ * @param string $email User's email
+ * @param string $token User's token
+ *
+ * @return string JSON with the anagrams if response is successful, otherwise JSON with error message
+ */
+function getResponse(string $word, string $email, string $token) : string {
     $user_data = getUserDataFromEmailAndToken($email, $token);
     if (!$user_data) {
         return json_encode(["success" => false, "message" => "bad_token"]);

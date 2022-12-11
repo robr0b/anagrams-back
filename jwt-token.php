@@ -7,13 +7,25 @@ use Firebase\JWT\Key;
 
 use Dotenv\Dotenv;
 
+// If the app is run locally, load the data from .env file.
+// Heroku does not need that to make its Config vars accessible
+
 if (file_exists(".env")) {
     $dotenv = Dotenv::createImmutable(__DIR__);
     $dotenv->load();
 }
 
-function generateJWTToken($user_data): string {
-    $payload = ["exp" => time() + 1200,
+/**
+ * Generate JWT token based on user data
+ *
+ * @param array $user_data Array with user id and email
+ *
+ *
+ * @return string JWT token
+ */
+
+function generateJWTToken(array $user_data): string {
+    $payload = ["exp" => time() + 1200, // token is valid for 20 minutes
         "data" => $user_data];
 
     return JWT::encode($payload, $_ENV["JWT_SECRET"], "HS256");

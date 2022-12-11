@@ -2,6 +2,9 @@
 require_once "vendor/autoload.php";
 use Dotenv\Dotenv;
 
+// If the app is run locally, load the data from .env file.
+// Heroku does not need that to make its Config vars accessible
+
 if (file_exists(".env")) {
     $dotenv = Dotenv::createImmutable(__DIR__);
     $dotenv->load();

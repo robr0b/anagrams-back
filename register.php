@@ -6,7 +6,23 @@ require_once "jwt-token.php";
 $email = $_POST["email"] ?? "";
 $password = $_POST["password"] ?? "";
 
-function getResponse($email, $password) {
+
+/**
+ * Get response based on user email and password. If the email address is not unique, add
+ * a message saying that email is already in use. Password must be 8 characters long and must
+ * contain a number, an uppercase letter and a lowercase letter. Generate a JWT
+ * if the registration is successful. Return JSON with success => true, user's email and the token.
+ * If registration is not successful, return JSON with success => false, and a message saying that
+ * the credentials are invalid.
+ *
+ * @param string $email User's email
+ * @param string $password User's password
+ *
+ *
+ * @return string JSON with user data if response is successful, otherwise JSON with error message
+ */
+function getResponse(string $email, string $password): string
+{
     $conn = getConnection();
     $response = ["success" => true, "message" => []];
 
