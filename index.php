@@ -46,7 +46,7 @@ function findAnagrams(string $word, array $wordbase_words) : array {
     if (array_key_exists($sorted_user_word_str, $wordbase_hashmap)) {
         return $wordbase_hashmap[$sorted_user_word_str];
     }
-    return ["This word does not have any anagrams. Try a different one!"];
+    return [];
 }
 
 function getResponse($word, $email, $token) {
@@ -67,6 +67,7 @@ function getResponse($word, $email, $token) {
     }
 
     $wordbase_words = preg_split('/\r\n|\r|\n/', $result[0]["wordbase_words"]);
+
 
     return json_encode(["success" => true, "anagrams" => findAnagrams($word, $wordbase_words)]);
 }
